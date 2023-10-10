@@ -114,13 +114,7 @@ passw = decMessage
 print(passw)
 
 
-with open('CR_Data','r') as cr_old:
-    cr_old = cr_old.readlines()
-for _ in range(len(cr_old)):
-    cr_old[_] = cr_old[_].strip()
-old_cr = list(pd.Series(cr_old,name='Change ID*+').drop_duplicates())
 
-cr_old = []
 
 user = os.getenv('username')
 auth_code_string = ''
