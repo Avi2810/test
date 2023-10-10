@@ -16,7 +16,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import os
 import sys
-this_version = 0.1
+this_version = 0.11
 from tkinter import Tk,Button,Frame,Label
 import requests, threading, time
 pop = Tk()
