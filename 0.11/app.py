@@ -16,7 +16,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import os
 import sys
-this_version = 0.11
+this_version = 0.1
 from tkinter import Tk,Button,Frame,Label
 import requests, threading, time
 pop = Tk()
@@ -276,17 +276,20 @@ file = max(files, key=os.path.getctime)
 print(file)
 
 df = pd.read_excel(file)
-previous_data = pd.read_excel('Previous_data.xlsx')
-not_completed = pd.merge(previous_data,df['Change ID*+'],on='Change ID*+',how='inner')
-outer = df.merge(not_completed['Change ID*+'], how='outer', indicator=True)
-anti_join = outer[(outer._merge=='left_only')].drop('_merge', axis=1)
-df = anti_join
-zero = []
-for key in dic_bw.keys():
-    if dic_bw[key] == 0:
-        zero.append(key)
-crs = pd.merge(not_completed,pd.DataFrame(zero,columns=['Signum']),on='Signum',how='inner')['Change ID*+']
-df = pd.concat([df, pd.read_excel(file).merge(crs,how='inner',on='Change ID*+')])
+try:
+    previous_data = pd.read_excel('Previous_data.xlsx')
+    not_completed = pd.merge(previous_data,df['Change ID*+'],on='Change ID*+',how='inner')
+    outer = df.merge(not_completed['Change ID*+'], how='outer', indicator=True)
+    anti_join = outer[(outer._merge=='left_only')].drop('_merge', axis=1)
+    df = anti_join
+    zero = []
+    for key in dic_bw.keys():
+        if dic_bw[key] == 0:
+            zero.append(key)
+    crs = pd.merge(not_completed,pd.DataFrame(zero,columns=['Signum']),on='Signum',how='inner')['Change ID*+']
+    df = pd.concat([df, pd.read_excel(file).merge(crs,how='inner',on='Change ID*+')])
+except:
+    not_completed = pd.DataFrame()
 df['Scheduled Start Date+'] = pd.to_datetime(df['Scheduled Start Date+'],format="%m/%d/%Y %I:%M:%S %p")
 df = df.sort_values(by=['Scheduled Start Date+'])
 
@@ -295,8 +298,7 @@ today_9 = datetime.datetime(year=datetime.datetime.now().year,month=datetime.dat
 tomorrow = datetime.datetime.now()+datetime.timedelta(days=1)
 tomorrow_9 = datetime.datetime(year=tomorrow.year,month=tomorrow.month,day=tomorrow.day,hour=20,minute=59,second=59)
 
-raw_data = df.loc[:]
-raw_data['Scheduled Start Date+'] = raw_data['Scheduled Start Date+'].dt.strftime("%m/%d/%Y %I:%M:%S %p")
+raw_data = pd.read_excel(file)
 
 expired = df[(df['Scheduled Start Date+'] < now)]
 expired['Scheduled Start Date+'] = expired['Scheduled Start Date+'].dt.strftime("%m/%d/%Y %I:%M:%S %p")
