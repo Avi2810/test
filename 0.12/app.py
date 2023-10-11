@@ -22,7 +22,7 @@ try:
 except:
     os.system("pip install cryptography")
 
-this_version = 0.11
+this_version = 0.12
 from tkinter import Tk,Button,Frame,Label
 import requests, threading, time
 pop = Tk()
