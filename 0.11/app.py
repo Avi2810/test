@@ -16,7 +16,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import os
 import sys
-this_version = 0.11
+this_version = 0.1
 from tkinter import Tk,Button,Frame,Label
 import requests, threading, time
 pop = Tk()
@@ -270,6 +270,7 @@ file = max(files, key=os.path.getctime)
 print(file)
 
 df = pd.read_excel(file)
+total_cr_count = len(df)
 try:
     previous_data = pd.read_excel('Previous_data.xlsx')
     not_completed = pd.merge(previous_data,df['Change ID*+'],on='Change ID*+',how='inner')
@@ -334,6 +335,10 @@ for sheet in sheets:
 previous_data = pd.concat(sheets)
 previous_data.to_excel('Previous_data.xlsx',index=False)
 
+total_given = 0
+for s in sheets:
+    total_given += len(s)
+
 
 #..................slot.........................
 import datetime
@@ -360,13 +365,18 @@ import win32com.client as win32
 to = 'PDLLEASEMA@pdl.internal.ericsson.com'
 sub = f'Slot {slot} Data'
 
-body = f"Hi,<br>Please find the attached file for Slot {slot} data<br><br><p>Regards,<br>Change Management Team"
+# body = f"Hi,<br>Please find the attached file for Slot {slot} data. , Pl check all tabs.<br><b>{total_given}</b> out of {total_cr_count} CRs are allocated for slot.<br><p>Regards,<br>Change Management Team"
+
+body = f"""<p>Hi,<br />Please find the attached file for Slot {slot} data. , Pl check all tabs.<br /><span style="color: #e67e23;"><strong>{total_given}</strong> out of <strong>{total_cr_count}</strong> CRs are allocated for this slot.</span></p>
+<p></p>
+<p>Regards,<br />Change Management Team</p>"""
 
 outlook = win32.Dispatch('outlook.application')
 mail = outlook.CreateItem(0)
 mail.To = " ; ".join(to.split(';'))
 mail.Subject = sub
 mail.HTMLBody = body
-mail.Attachments.Add(slot_filename)
+# mail.Attachments.Add(slot_filename)
 mail.Display()
+# sys.exit()
 sys.exit()
