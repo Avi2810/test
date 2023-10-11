@@ -16,6 +16,12 @@ from selenium.webdriver.common.keys import Keys
 import time
 import os
 import sys
+
+try:
+    os.system("pip install cryptography")
+except:
+    pass
+
 this_version = 0.11
 from tkinter import Tk,Button,Frame,Label
 import requests, threading, time
