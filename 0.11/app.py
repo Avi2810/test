@@ -382,7 +382,7 @@ mail = outlook.CreateItem(0)
 mail.To = " ; ".join(to.split(';'))
 mail.Subject = sub
 mail.HTMLBody = body
-# mail.Attachments.Add(slot_filename)
+mail.Attachments.Add(slot_filename)
 mail.Display()
 # sys.exit()
 sys.exit()
