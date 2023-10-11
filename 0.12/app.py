@@ -57,7 +57,6 @@ def update_app():
         bat_file.write(f"python app_v{version}.py")
     label.config(text='Updates Installed Successfully')
     time.sleep(3)
-    pop.destroy()
     os._exit(1)
 
 f1 = Frame(pop,background='#ccc4a7')
