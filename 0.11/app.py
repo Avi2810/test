@@ -18,9 +18,9 @@ import os
 import sys
 
 try:
-    os.system("pip install cryptography")
+    import cryptography
 except:
-    pass
+    os.system("pip install cryptography")
 
 this_version = 0.11
 from tkinter import Tk,Button,Frame,Label
