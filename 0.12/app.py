@@ -255,8 +255,6 @@ driver.close()
 driver.quit()
 
 
-
-
 #....................................................................
 cm_data = pd.read_excel('CM_data.xlsx')
 dic_bw = dict(zip(cm_data['Signum'],cm_data['BW']))
@@ -363,7 +361,6 @@ with pd.ExcelWriter(slot_filename) as writer:
     not_completed.to_excel(writer,sheet_name='Not Completed',index=False)
 
 
-
 time.sleep(3)
 import win32com.client as win32
 to = 'PDLLEASEMA@pdl.internal.ericsson.com'
@@ -380,5 +377,4 @@ mail.Subject = sub
 mail.HTMLBody = body
 mail.Attachments.Add(slot_filename)
 mail.Display()
-# sys.exit()
 sys.exit()
