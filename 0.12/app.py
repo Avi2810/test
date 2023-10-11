@@ -369,8 +369,6 @@ import win32com.client as win32
 to = 'PDLLEASEMA@pdl.internal.ericsson.com'
 sub = f'Slot {slot} Data'
 
-# body = f"Hi,<br>Please find the attached file for Slot {slot} data, Pl check all tabs.<br><b>{total_given}</b> out of {total_cr_count} CRs are allocated for slot.<br><p>Regards,<br>Change Management Team"
-
 body = f"""<p>Hi,<br />Please find the attached file for Slot {slot} data, Pl check all tabs.<br /><span style="color: #e67e23;"><strong>{total_given}</strong> out of <strong>{total_cr_count}</strong> CRs are allocated for this slot.</span></p>
 <p></p>
 <p>Regards,<br />Change Management Team</p>"""
