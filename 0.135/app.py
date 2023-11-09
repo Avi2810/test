@@ -39,12 +39,13 @@ pop.overrideredirect(True)
 
 def te():
     global avl_version
+    avl_version = 0
     time.sleep(1)
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}
     try:
         avl_version = (requests.get(url='https://raw.githubusercontent.com/Avi2810/test/main/version.txt',headers=headers, timeout=10).text).strip()
     except:
-        return
+        pass
     if float(avl_version) > this_version:
         f2.pack_forget()
         f3.pack(fill='both',expand=True,padx=10,pady=10)
