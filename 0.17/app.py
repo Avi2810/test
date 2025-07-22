@@ -167,7 +167,7 @@ options = webdriver.EdgeOptions()
 prefs={"download.default_directory":"C:\\CM Automation"}
 options.add_experimental_option("prefs",prefs)
 service=Service(executable_path=driver_path)
-driver = webdriver.Edge(options=options, service-service)
+driver = webdriver.Edge(options=options, service=service)
 driver.maximize_window()
 time.sleep(1)
 driver.get('https://nextgentm-in.sdt.ericsson.net/arsys/forms/umt-ars-in/SHR%3ALandingConsole/Default+Administrator+View/?cacheid=c4ed3626')
